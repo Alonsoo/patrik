@@ -1,0 +1,24 @@
+.notes {
+	height: auto;
+	border: none;
+	border-left: heavy blue;
+	border-top: blank;
+	border-title-color: blue;
+}
+
+.app_title {
+	color: orange;
+	margin: 2;
+	text-align: center;
+	width: 100%;
+}
+
+TabbedContent {
+	padding: 2;
+}
+
+Collapsible {
+	padding: 0	
+	margin: 0;
+	border: none;
+}
