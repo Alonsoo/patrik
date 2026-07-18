@@ -1,0 +1,66 @@
+[
+    [
+        {
+            "name": "Chop Builder",
+            "time": 15,
+            "description": "Descripcion",
+            "notes": "Rondas 1 y 2 - 100%, 90%\ndfdsfdsa\nasfd"
+        },
+        {
+            "name": "Encontrar notas",
+            "time": 5,
+            "description": null,
+            "notes": ""
+        },
+        {
+            "name": "Escala mayor",
+            "time": 5,
+            "description": null,
+            "notes": "En una o dos cuerdas, a oido"
+        },
+        {
+            "name": "Escalas",
+            "time": 15,
+            "description": null,
+            "notes": ""
+        },
+        {
+            "name": "Improv",
+            "time": 20,
+            "description": null,
+            "notes": ""
+        }
+    ],
+    [
+        {
+            "name": "Speed",
+            "time": 10,
+            "description": null,
+            "notes": ""
+        },
+        {
+            "name": "Strum",
+            "time": 10,
+            "description": null,
+            "notes": ""
+        },
+        {
+            "name": "Groove",
+            "time": 5,
+            "description": null,
+            "notes": "Tomo Funk"
+        },
+        {
+            "name": "Encontrar acordes",
+            "time": 10,
+            "description": null,
+            "notes": ""
+        },
+        {
+            "name": "Acordes aplicados",
+            "time": 20,
+            "description": null,
+            "notes": ""
+        }
+    ]
+]
