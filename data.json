@@ -4,7 +4,7 @@
             "name": "Chop Builder",
             "time": 15,
             "description": "Descripcion",
-            "notes": "Rondas 1 y 2 - 100%, 90%\ndfdsfdsa\nasfd"
+            "notes": "Rondas 1 y 2 - 100%, 90%\nEj. 6 en adelante de ronda 2 hacer aparte con metronomo cada mano por separado"
         },
         {
             "name": "Encontrar notas",
@@ -46,7 +46,7 @@
         },
         {
             "name": "Groove",
-            "time": 5,
+            "time": 10,
             "description": null,
             "notes": "Tomo Funk"
         },

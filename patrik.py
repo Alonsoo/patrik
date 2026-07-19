@@ -36,10 +36,9 @@ class Excercise:
 
 class ExcerciseDisplay(VerticalGroup):
 
-    def __init__(self, excercise: Excercise, offset: int):
+    def __init__(self, excercise: Excercise):
         super().__init__()
         self.excercise = excercise
-        self.whitespace_offset = offset
     
     def compose(self):
         #whitespace = self.whitespace_offset - len(self.excercise.name) - len(str(self.excercise.time))
@@ -64,7 +63,7 @@ class ExcerciseDisplay(VerticalGroup):
 
     def update_title(self):
         coll = self.query_one("Collapsible")
-        whitespace = self.size.width - len(self.excercise.name) - len(str(self.excercise.time)) - 7
+        whitespace = self.size.width - len(self.excercise.name) - len(str(self.excercise.time)) - 8
         coll.title = self.excercise.name + " "*whitespace + str(self.excercise.time) + " min"
 
 
@@ -82,10 +81,8 @@ class PatrickApp(App):
         with TabbedContent():
             for i, session in enumerate(self.sessions):
                 with TabPane(f"v{i+1}"):
-                    max_name_len = max([len(ex.name) for ex in session])
-                    offset = max_name_len + 30
                     for excercise in session:
-                        yield ExcerciseDisplay(excercise, offset)
+                        yield ExcerciseDisplay(excercise)
         yield Footer()
 
 
