@@ -1,9 +1,12 @@
 from dataclasses import dataclass, asdict
 import json
 from textual.app import App, ComposeResult
-from textual.widgets import Footer, Header, Collapsible, TextArea, TabbedContent, TabPane, Label, Rule
-from textual.containers import VerticalGroup
+from textual.widgets import Footer, Header, Collapsible, TextArea, TabbedContent, TabPane, Label, Rule, Digits, Button
+from textual.containers import VerticalGroup, HorizontalGroup, Horizontal, Vertical
 from textual.events import Resize
+import random
+import pyfiglet
+import time
 
 app_title = "\
      _/\/\/\/\/\__________________/\/\__________________/\/\____/\/\_______\n\
@@ -67,6 +70,86 @@ class ExcerciseDisplay(VerticalGroup):
         coll.title = self.excercise.name + " "*whitespace + str(self.excercise.time) + " min"
 
 
+class NotePicker(Horizontal):
+
+    BINDINGS = [
+            ("up", "inc_interval", "Increment interval"),
+            ("down", "dec_interval", "Decrease interval"),
+            ("space", "toggle", "Start/Stop")
+            ]
+
+    notes = ['Ab', 'A', 'A#', 'Bb', 'B', 'C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb', 'G', 'G#']
+    started = False
+    interval = 2.5;
+
+    def compose(self) -> ComposeResult:
+        #note = text2art(random.choice(self.notes), font="future") #future smblock tarty3 dos_rebel
+        #note = pyfiglet.figlet_format(random.choice(self.notes), font="smblock")
+        self.border_title = "Random Note Picker"
+        self.note_display = Label("", classes="note")
+        self.choose_note()
+        yield self.note_display
+        with Horizontal(classes="interval_picker"):
+            self.interval_display = Digits(str(self.interval), classes="interval")
+            yield self.interval_display
+            with Vertical():
+                yield Button(">", id="inc")
+                yield Button("<", id="dec")
+                yield Button("Start", id="start")
+                yield Button("Stop", id="stop")
+
+
+    def action_dec_interval(self):
+        if self.interval >= 1:
+            self.interval -= 0.5
+            self.interval_display.update(str(self.interval))
+            if self.started:
+                self.start()
+
+    def action_inc_interval(self):
+        self.interval += 0.5
+        self.interval_display.update(str(self.interval))
+        if self.started:
+            self.start()
+
+    def action_toggle(self):
+        if self.started:
+            self.stop()
+        else:
+            self.start()
+
+    def on_mount(self):
+        self.timer = self.set_interval(self.interval, self.choose_note, pause=True)
+
+    def start(self):
+        self.started = True
+        self.add_class("started")
+        self.choose_note()
+        self.timer.stop()
+        self.timer = self.set_interval(self.interval, self.choose_note, pause=False)
+
+    def stop(self):
+        if self.started:
+            self.started = False
+            self.remove_class("started")
+            self.timer.pause()
+        
+
+    def choose_note(self):
+        note = pyfiglet.figlet_format(random.choice(self.notes), font="smblock")
+        self.note_display.update(note)
+
+    def on_button_pressed(self, event: Button.Pressed):
+        if event.button.id == "start":
+            self.start()
+        if event.button.id == "stop":
+            self.stop()
+        if event.button.id == "inc":
+            self.action_inc_interval()
+        if event.button.id == "dec":
+            self.action_dec_interval()
+
+
 class PatrickApp(App):
     """Musical practice aid for the terminal"""
     
@@ -78,11 +161,18 @@ class PatrickApp(App):
 
         yield Header()
         yield Label(app_title_2, classes="app_title")
-        with TabbedContent():
+        #yield NotePicker()
+        yield Label("Sessoins", classes="section_title")
+        with TabbedContent(classes="sessions"):
             for i, session in enumerate(self.sessions):
                 with TabPane(f"v{i+1}"):
                     for excercise in session:
                         yield ExcerciseDisplay(excercise)
+
+        yield Label("Tools", classes="section_title")
+        with TabbedContent(classes="tools"):
+            with TabPane("Note Picker"):
+                yield NotePicker()
         yield Footer()
 
 

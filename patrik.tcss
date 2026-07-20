@@ -11,8 +11,16 @@
 	width: 100%;
 }
 
-TabbedContent {
-	padding: 2;
+
+.section_title {
+	width: 100%;
+	text-align: center;
+	text-style: bold;
+	margin-top: 2; 
+}
+
+.sessions {
+	padding: 0 2 0 2;
 }
 
 .excercise {
@@ -37,4 +45,88 @@ TabbedContent {
 
 Rule {
 	margin: 0;
+}
+
+App{
+	align-horizontal: center; 
+	align: center middle;
+}
+
+NotePicker {
+	border: heavy $primary;
+	height: auto;
+	width: auto;
+	padding: 0;
+	* {
+		width: auto;
+	}
+	.note {
+		align: center middle;
+		content-align: center middle;
+		height: 4;
+		width: 8;
+		margin: 0 4 0 4;
+	}
+	.interval_picker {
+		height: auto;
+		align: center bottom;
+		background: $panel;
+		margin-top: 1;
+	}
+	.interval {
+		align: center bottom;
+		content-align: center bottom;
+		margin-right: 2;
+		margin-left: 2;
+
+	}
+	Vertical {
+		align: center bottom;
+		content-align: center bottom;
+		height: 100%;
+		width: auto;
+		Button {
+			width: 100%;
+			padding: 0;
+			height: 1;
+			outline: none;
+			border: none;
+			min-height: 1;
+			min-width: 1;
+			align: center bottom;
+		}
+	}
+
+	
+	#start {
+		width: 7;
+		color: green;
+		display: block;
+	}
+	&.started #start {
+		display: none;
+	}
+	#stop {
+		width: 7;
+		display: none;
+		color: red;
+		content-align: center middle;
+		text-align: center;
+		align: center middle;
+	}
+	&.started #stop {
+		display: block;
+	}
+}
+
+
+.tools {
+	margin: 1 2 0 2;
+	padding: 0;
+	TabbedContent {
+		padding: 0;
+	}
+	TabPane {
+		align: center middle;
+	}
 }
